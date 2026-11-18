@@ -22,3 +22,8 @@ Local RoPE: Uses a base frequency of 10,000 for sliding-window attention.
 Global RoPE: Uses a base frequency of 1,000,000 for full attention.
 
 This allows the architecture to use different positional encoding configurations for local and global attention layers.
+### 3. Grouped Query Attention (GQA)
+
+The attention mechanism uses Grouped Query Attention (GQA) to capture relationships between tokens efficiently.
+Unlike standard Multi-Head Attention, which maintains separate Query, Key, and Value heads, GQA uses multiple Query heads that share a smaller number of Key-Value heads.
+The input representations are projected into Query, Key, and Value vectors. RoPE is applied to the Query and Key vectors, and the Key-Value representations are expanded across their associated Query heads. Scaled dot-product attention is then computed using a causal attention mask, ensuring that a token cannot access future tokens during training. The resulting attention outputs are concatenated and passed through an output projection layer.
